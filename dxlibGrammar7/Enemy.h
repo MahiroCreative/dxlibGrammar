@@ -3,12 +3,16 @@
 class Enemy
 {
 private:
-	/*メンバ変数*/
+	/*privateメンバ変数*/
 public:
+	/*publicメンバ変数*/
+
 	/*コンストラクタ*/
-	Enemy();
+
 	/*Getter*/
+
 	/*Setter*/
+
 	/*メンバ関数*/
 	void Update();
 	void Draw();
