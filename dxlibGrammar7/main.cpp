@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Player.h"
+#include "Enemy.h"
 
 
 /*概要*/
@@ -38,6 +39,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	int playerDrawHandle = LoadGraph("Chara.png");
 	//クラスは基本的にポインタで運用する。
 	Player* pPlayer = new Player(playerDrawHandle,100,300,12);
+	//Enemy* pEnemy = new Enemy();
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -49,14 +51,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		ClearDrawScreen();
 
 
-
-		/*ゲーム処理部*/
+		/*Update*/
 		pPlayer->Update();
 
+		/*Draw*/
+		pPlayer->Draw();
 
-
-
-
+		/*DebguDraw*/
+		pPlayer->DebugDraw();
 
 		//裏画面を表へ
 		ScreenFlip();
