@@ -3,9 +3,11 @@ class Player
 {
 private:
 	/*privateメンバ変数*/
-
+	
 public:
 	/*publicメンバ変数*/
+	int X;
+	int Y;
 
 	/*コンストラクタ*/
 	
