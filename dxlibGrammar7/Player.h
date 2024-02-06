@@ -24,11 +24,10 @@ public:
 
 /*コンストラクタ*/
 Player::Player(int x,int y):
+	X(x),
+	Y(y),
 	_r(12)
 {
-	//引数初期化
-	X = x;
-	Y = y;
 
 }
 
