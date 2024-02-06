@@ -3,13 +3,14 @@ class Player
 {
 private:
 	/*privateメンバ変数*/
-	
+	int _r;//半径
 public:
 	/*publicメンバ変数*/
-	int X;
-	int Y;
+	int X;//x座標
+	int Y;//y座標
 
 	/*コンストラクタ*/
+	Player(int X,int Y);
 	
 	/*Getter*/
 
@@ -22,7 +23,14 @@ public:
 };
 
 /*コンストラクタ*/
+Player::Player(int x,int y):
+	_r(12)
+{
+	//引数初期化
+	X = x;
+	Y = y;
 
+}
 
 /*ゲッター*/
 
