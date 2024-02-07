@@ -1,6 +1,10 @@
-#include "DxLib.h"
+//オブジェクトヘッダ
 #include "Player.h"
 #include "Enemy.h"
+//共有ヘッダ(依存関係が強いものほど最後)
+#include "MyGameCommon.h"
+#include "DxLib.h"//何処でも使うので最後
+
 
 
 /*概要*/
@@ -20,6 +24,8 @@
 //本来ならクラスを作る際に.hと.cppに分けるが、コードの簡便化のために全て.hに記述している。
 //実際にゲーム作りの際には.hと.cppに分けてほしい。
 //コンストラクタとか、ゲッターとかセッターとかの解説はここではしない。
+//また、当たり判定のカラーコードなど、よく使う定数などは"Common.h"にまとめた。
+
 
 
 //Dxlibのエントリーポイント
@@ -30,7 +36,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	bool gameRoop = true;
 
 	/*Dxlib初期化*/
-	SetGraphMode(1280, 720, 32);//画面サイズと解像度
+	SetGraphMode(WindowSize::SIZE_X, WindowSize::SIZE_Y, 32);//画面サイズと解像度
 	ChangeWindowMode(true);//Windowモード
 	if (DxLib_Init() == -1) { return -1; }//Dxlib初期化
 	SetDrawScreen(DX_SCREEN_BACK);//ダブルバッファリング
@@ -38,6 +44,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*ゲーム変数*/
 	int playerDrawHandle = LoadGraph("Chara.png");
 	//クラスは基本的にポインタで運用する。
+	Player* pPlayer = new Player(20,360,12,4,3);
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -48,8 +55,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		//裏画面の初期化
 		ClearDrawScreen();
 
-
 		/*Update*/
+		pPlayer->Update();
 
 		/*Draw*/
 
