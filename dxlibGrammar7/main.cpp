@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 //共有ヘッダ(依存関係が強いものほど最後)
-#include "MyGameCommon.h"
+#include "MyDxlibCommon.h"
 #include "DxLib.h"//何処でも使うので最後
 
 
@@ -44,7 +44,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*ゲーム変数*/
 	int playerDrawHandle = LoadGraph("Chara.png");
 	//クラスは基本的にポインタで運用する。
-	Player* pPlayer = new Player(20,360,12,4,3);
+	Player* pPlayer = new Player(playerDrawHandle, 20, 360, 12, 4, 3);
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -59,6 +59,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		pPlayer->Update();
 
 		/*Draw*/
+		pPlayer->Draw();
 
 		/*DebguDraw*/
 
