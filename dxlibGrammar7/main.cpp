@@ -44,7 +44,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*ゲーム変数*/
 	int playerDrawHandle = LoadGraph("Chara.png");
 	//クラスは基本的にポインタで運用する。
-	Player* pPlayer = new Player(playerDrawHandle, 20, 360, 12, 4, 3);
+	Player* pPlayer = new Player(playerDrawHandle, 20, 360, 12, 4);
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -56,12 +56,17 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		ClearDrawScreen();
 
 		/*Update*/
+		//player.
 		pPlayer->Update();
+		//bullet.
 
 		/*Draw*/
+		//player.
 		pPlayer->Draw();
 
 		/*DebguDraw*/
+		int debugNum=0;
+		DrawFormatString(0,0,ColorCode::RED,"DebugNum:%d",debugNum);
 
 
 		//裏画面を表へ

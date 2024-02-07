@@ -9,12 +9,11 @@ private:
 	int _drawHandle;//画像ハンドル
 	int _r;//半径
 	int _speed;//スピード
-	int _maxShotNum;//最大弾数
-	int _shotCount;//発射弾数
 	//変更される可能性の無いものはここで初期化
 	unsigned int _colColer = ColorCode::LIME;//コリジョン色
 	int _scale = 1;//スケール
 	int _rotate = 0;//回転度
+	bool _isShot = false;//ショット判定
 	bool _isHit = false;//当たり判定
 	bool _isVisible = true;//表示判定
 	//Input用の変数
@@ -29,9 +28,10 @@ public:
 	int Y;//y座標
 
 	/*コンストラクタ*/
-	Player(int drawHandle,int x, int y, int r, int speed, int maxShotNum);
+	Player(int drawHandle,int x, int y, int r, int speed);
 	
 	/*Getter*/
+	bool GetShotFlag();
 
 	/*Setter*/
 
@@ -50,20 +50,21 @@ public:
 /// <param name="r">半径</param>
 /// <param name="speed">速度</param>
 /// <param name="maxShotNum">最大発射数</param>
-Player::Player(int drawHandle, int x, int y, int r, int speed, int maxShotNum) :
+Player::Player(int drawHandle, int x, int y, int r,int speed) :
 	_drawHandle(drawHandle),
 	X(x),
 	Y(y),
 	_r(r),
-	_speed(speed),
-	_maxShotNum(maxShotNum),
-	_shotCount(0)
+	_speed(speed)
 {
 	//↑インスタンス作成時に変更する可能性があるものだけコンストラクタで初期化。
 }
 
 /*ゲッター*/
-
+bool Player::GetShotFlag()
+{
+	return _isShot;
+}
 
 /*セッター*/
 
@@ -105,9 +106,13 @@ void Player::Update()
 	}
 
 	/*攻撃*/
-	if (_isEnterInput.IsNow == true && _shotCount < _maxShotNum)
+	if (_isEnterInput.IsNow == true)
 	{
-		_shotCount++;
+		_isShot = true;
+	}
+	else
+	{
+		_isShot = false;
 	}
 	
 }
