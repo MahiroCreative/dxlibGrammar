@@ -38,7 +38,7 @@ public:
 /// <param name="y">Yç¿ïW</param>
 /// <param name="r">îºåa</param>
 /// <param name="speed">ë¨ìx</param>
-Enemy::Enemy(int x, int y, int r, int speed):
+Enemy::Enemy(int x, int y, int r, int speed) :
 	X(x),
 	Y(y),
 	_r(r),
@@ -55,7 +55,7 @@ void Enemy::Update()
 	//à⁄ìÆ
 	Y += _speed;
 	//îΩì]
-	if (Y > 640 && Y <80)
+	if (Y > 640 || Y < 80)
 	{
 		_speed = -_speed;
 	}
@@ -66,7 +66,7 @@ void Enemy::Update()
 /// </summary>
 void Enemy::Draw()
 {
-	DrawCircle(X,Y,_r,_color,1);
+	DrawCircle(X, Y, _r, _color, 1);
 }
 
 void Enemy::DebugDraw()
