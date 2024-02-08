@@ -44,7 +44,7 @@ Enemy::Enemy(int x, int y, int r, int speed):
 	_r(r),
 	_speed(speed)
 {
-
+	//↑インスタンス作成時に変更する可能性があるものだけコンストラクタで初期化。
 }
 
 /// <summary>
@@ -53,6 +53,12 @@ Enemy::Enemy(int x, int y, int r, int speed):
 void Enemy::Update()
 {
 	//移動
+	Y += _speed;
+	//反転
+	if (Y > 640 && Y <80)
+	{
+		_speed = -_speed;
+	}
 }
 
 /// <summary>
@@ -61,4 +67,9 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	DrawCircle(X,Y,_r,_color,1);
+}
+
+void Enemy::DebugDraw()
+{
+
 }
