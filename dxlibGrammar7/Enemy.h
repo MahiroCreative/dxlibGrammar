@@ -4,6 +4,18 @@
 
 class Enemy
 {
+public:
+	/*publicメンバ変数*/
+	int X;//x座標
+	int Y;//y座標
+	/*コンストラクタ*/
+	Enemy(int x, int y, int r, int speed);
+	/*Getter*/
+	/*Setter*/
+	/*メンバ関数*/
+	void Update();//処理の更新
+	void Draw();//表示の更新
+	void DebugDraw();//Debug表示の更新
 private:
 	/*privateメンバ変数*/
 	int _r;//半径
@@ -13,22 +25,6 @@ private:
 	unsigned int _hitColor = ColorCode::RED;//Hit色
 	bool _isHit = false;//当たり判定
 	bool _isVisible = true;//表示判定
-public:
-	/*publicメンバ変数*/
-	int X;//x座標
-	int Y;//y座標
-
-	/*コンストラクタ*/
-	Enemy(int x, int y, int r, int speed);
-
-	/*Getter*/
-
-	/*Setter*/
-
-	/*メンバ関数*/
-	void Update();//処理の更新
-	void Draw();//表示の更新
-	void DebugDraw();//Debug表示の更新
 };
 
 /// <summary>

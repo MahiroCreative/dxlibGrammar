@@ -1,9 +1,24 @@
 #pragma once
+#include "Bullet.h"
 #include "MyDxlibCommon.h"
 #include "DxLib.h"
 
 class Player
 {
+public:
+	/*publicメンバ変数*/
+	int X;//x座標
+	int Y;//y座標
+	/*コンストラクタ*/
+	Player(int drawHandle, int x, int y, int r, int speed);
+	/*Getter*/
+	bool GetShotFlag();
+	/*Setter*/
+	//none.
+	/*メンバ関数*/
+	void Update();//処理の更新
+	void Draw();//表示の更新
+	void DebugDraw();//Debug表示の更新
 private:
 	/*privateメンバ変数*/
 	int _drawHandle;//画像ハンドル
@@ -17,28 +32,11 @@ private:
 	bool _isHit = false;//当たり判定
 	bool _isVisible = true;//表示判定
 	//Input用の変数
-	IsKeyInput _isEnterInput{false,false,KEY_INPUT_RETURN };//Enter.
-	IsKeyInput _isUpInput{false,false,KEY_INPUT_W};//Up.
+	IsKeyInput _isEnterInput{ false,false,KEY_INPUT_RETURN };//Enter.
+	IsKeyInput _isUpInput{ false,false,KEY_INPUT_W };//Up.
 	IsKeyInput _isDownInput{ false,false,KEY_INPUT_S };//Down.
 	IsKeyInput _isLeftInput{ false,false,KEY_INPUT_A };//Left.
 	IsKeyInput _isRightInput{ false,false,KEY_INPUT_D };//Right.
-public:
-	/*publicメンバ変数*/
-	int X;//x座標
-	int Y;//y座標
-
-	/*コンストラクタ*/
-	Player(int drawHandle,int x, int y, int r, int speed);
-	
-	/*Getter*/
-	bool GetShotFlag();
-
-	/*Setter*/
-
-	/*メンバ関数*/
-	void Update();//処理の更新
-	void Draw();//表示の更新
-	void DebugDraw();//Debug表示の更新
 };
 
 /*コンストラクタ*/
