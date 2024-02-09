@@ -1,6 +1,7 @@
+#pragma once
 //オブジェクトヘッダ
 #include "Player.h"
-#include "Enemy.h"
+//#include "Enemy.h"
 //共有ヘッダ(依存関係が強いものほど最後)
 #include "MyDxlibCommon.h"
 #include "DxLib.h"//何処でも使うので最後
@@ -45,7 +46,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	int playerDrawHandle = LoadGraph("Chara.png");
 	//クラスは基本的にポインタで運用する。
 	Player* pPlayer = new Player{ playerDrawHandle, 20, 360, 12, 4 };
-	Enemy* pEnemy = new Enemy{ 1100,360,64,2 };
+	//Enemy* pEnemy = new Enemy{ 1100,360,64,2 };
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -60,14 +61,14 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		//player.
 		pPlayer->Update();
 		//enemy.
-		pEnemy->Update();
+		//pEnemy->Update();
 		//bullet.
 
 		/*Draw*/
 		//player.
 		pPlayer->Draw();
 		//enemy.
-		pEnemy->Draw();
+		//pEnemy->Draw();
 
 		/*DebguDraw*/
 		int debugNum = 0;
