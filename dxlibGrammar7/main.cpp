@@ -47,7 +47,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	//クラスは基本的にポインタで運用する。
 	Player* pPlayer = new Player{ playerDrawHandle, 20, 360, 12, 4 };
 	Enemy* pEnemy = new Enemy{ 1100,360,64,2 };
-	Bullet* pPBullet = new Bullet{ 20,360,8,8,ColorCode::YELLOW };
 
 	/*ゲームループ部*/
 	//gameRoop.
@@ -63,16 +62,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		pPlayer->Update();
 		//enemy.
 		pEnemy->Update();
-		//bullet.
-		pPBullet->Update();
 
 		/*Draw*/
 		//player.
 		pPlayer->Draw();
 		//enemy.
 		pEnemy->Draw();
-		//pLayerBullet.
-		pPBullet->Draw();
 
 		/*DebguDraw*/
 		int debugNum = 0;
