@@ -1,5 +1,6 @@
 #pragma once
 //オブジェクトヘッダ
+#include "Bullet.h"
 #include "Player.h"
 #include "Enemy.h"
 //共有ヘッダ(依存関係が強いものほど最後)
