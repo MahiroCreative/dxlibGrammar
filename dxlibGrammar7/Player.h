@@ -12,7 +12,6 @@ public:
 	/*コンストラクタ*/
 	Player(int drawHandle, int x, int y, int r, int speed);
 	/*Getter*/
-	bool GetShotFlag();
 	/*Setter*/
 	//none.
 	/*メンバ関数*/
@@ -28,7 +27,7 @@ private:
 	unsigned int _colColer = ColorCode::LIME;//コリジョン色
 	int _scale = 1;//スケール
 	int _rotate = 0;//回転度
-	bool _isShot = false;//ショット判定
+	bool _isShotFlag = false;//ショットフラグ
 	bool _isHit = false;//当たり判定
 	bool _isVisible = true;//表示判定
 	//Input用の変数
@@ -37,6 +36,8 @@ private:
 	IsKeyInput _isDownInput{ false,false,KEY_INPUT_S };//Down.
 	IsKeyInput _isLeftInput{ false,false,KEY_INPUT_A };//Left.
 	IsKeyInput _isRightInput{ false,false,KEY_INPUT_D };//Right.
+	//PlayerBullet.
+	Bullet* _pPBullet;
 };
 
 /*コンストラクタ*/
@@ -59,10 +60,6 @@ Player::Player(int drawHandle, int x, int y, int r,int speed) :
 }
 
 /*ゲッター*/
-bool Player::GetShotFlag()
-{
-	return _isShot;
-}
 
 /*セッター*/
 
@@ -103,15 +100,19 @@ void Player::Update()
 		X += _speed;
 	}
 
-	/*攻撃*/
-	if (_isEnterInput.IsNow == true)
+	/*PlayerBulletの発射*/
+	if (_isEnterInput.IsNow)
 	{
-		_isShot = true;
+		_pPBullet = new Bullet(X, Y, _r, 8, ColorCode::AQUA);
+		_isShotFlag = true;
 	}
-	else
+
+	/*PlayerBulletの更新*/
+	if (_isShotFlag)
 	{
-		_isShot = false;
+		_pPBullet->Update();
 	}
+
 	
 }
 /// <summary>
@@ -119,7 +120,16 @@ void Player::Update()
 /// </summary>
 void Player::Draw()
 {
+	//Playerの描画
 	DrawRotaGraph(X,Y,1,0,_drawHandle,1);
+
+	//Bulletの描画
+	if (_isShotFlag)
+	{
+		_pPBullet->Draw();
+	}
+
+
 }
 /// <summary>
 /// Debug表示の更新
