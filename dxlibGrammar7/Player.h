@@ -56,7 +56,11 @@ Player::Player(int drawHandle, int x, int y, int r,int speed) :
 	_r(r),
 	_speed(speed)
 {
-	//↑インスタンス作成時に変更する可能性があるものだけコンストラクタで初期化。
+	//弾丸の生成
+	for (int i =0;i<3;i++)
+	{
+		_pPBullet[i] = new Bullet(X,Y,r,8,ColorCode::RED);
+	}
 }
 
 /*ゲッター*/
@@ -100,26 +104,12 @@ void Player::Update()
 		X += _speed;
 	}
 
-	/*PlayerBulletの発射*/
-	if (_isEnterInput.IsNow)
-	{
-		_pPBullet[0] = new Bullet(X, Y, _r, 8, ColorCode::AQUA);
-		_isShotFlag = true;
-	}
-
 	/*PlayerBulletの更新*/
-	if (_isShotFlag)
+	for (int i=0;i<3;i++)
 	{
-		if (_pPBullet[0] != nullptr)
-		{
-			_pPBullet[0]->Update();
-		}
-		else
-		{
-			_isShotFlag = false;
-		}
-
+		_pPBullet[i]->Update();
 	}
+
 
 	
 }
@@ -130,16 +120,6 @@ void Player::Draw()
 {
 	//Playerの描画
 	DrawRotaGraph(X,Y,1,0,_drawHandle,1);
-
-	//Bulletの描画
-	if (_isShotFlag)
-	{
-		if (_pPBullet[0] != nullptr)
-		{
-			_pPBullet[0]->Draw();
-		}
-	}
-
 
 }
 /// <summary>

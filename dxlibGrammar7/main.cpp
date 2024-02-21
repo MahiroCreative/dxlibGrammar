@@ -75,7 +75,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 		/*DebguDraw*/
 		int debugNum = 0;
-		DrawFormatString(0, 0, ColorCode::RED, "WSAD(上下左右),左クリック(ショット)");
+		DrawFormatString(0, 0, ColorCode::RED, "WSAD(上下左右),Enter(ショット)");
 		DrawFormatString(0, 20, ColorCode::RED, "debugNum:%d",debugNum);
 
 
