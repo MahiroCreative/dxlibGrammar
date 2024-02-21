@@ -37,7 +37,7 @@ private:
 	IsKeyInput _isLeftInput{ false,false,KEY_INPUT_A };//Left.
 	IsKeyInput _isRightInput{ false,false,KEY_INPUT_D };//Right.
 	//PlayerBullet.
-	Bullet* _pPBullet;
+	Bullet* _pPBullet[3];
 };
 
 /*コンストラクタ*/
@@ -103,14 +103,22 @@ void Player::Update()
 	/*PlayerBulletの発射*/
 	if (_isEnterInput.IsNow)
 	{
-		_pPBullet = new Bullet(X, Y, _r, 8, ColorCode::AQUA);
+		_pPBullet[0] = new Bullet(X, Y, _r, 8, ColorCode::AQUA);
 		_isShotFlag = true;
 	}
 
 	/*PlayerBulletの更新*/
 	if (_isShotFlag)
 	{
-		_pPBullet->Update();
+		if (_pPBullet[0] != nullptr)
+		{
+			_pPBullet[0]->Update();
+		}
+		else
+		{
+			_isShotFlag = false;
+		}
+
 	}
 
 	
@@ -126,7 +134,10 @@ void Player::Draw()
 	//Bulletの描画
 	if (_isShotFlag)
 	{
-		_pPBullet->Draw();
+		if (_pPBullet[0] != nullptr)
+		{
+			_pPBullet[0]->Draw();
+		}
 	}
 
 
