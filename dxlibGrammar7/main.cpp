@@ -64,9 +64,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		//enemy.
 		pEnemy->Update();
 
-		//Bullet.
-
-
 		/*Draw*/
 		//player.
 		pPlayer->Draw();
@@ -75,8 +72,12 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 		/*DebguDraw*/
 		int debugNum = 0;
+		//Debu文字
 		DrawFormatString(0, 0, ColorCode::RED, "WSAD(上下左右),Enter(ショット)");
 		DrawFormatString(0, 20, ColorCode::RED, "debugNum:%d",debugNum);
+		//コリジョン
+		pPlayer->DebugDraw();
+		pEnemy->DebugDraw();
 
 
 		//裏画面を表へ

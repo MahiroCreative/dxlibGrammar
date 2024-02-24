@@ -1,5 +1,6 @@
 #pragma once
 #include "Bullet.h"
+#include "Enemy.h"
 #include "MyDxlibCommon.h"
 #include "DxLib.h"
 
@@ -10,7 +11,7 @@ public:
 	int X;//x座標
 	int Y;//y座標
 	/*コンストラクタ*/
-	Player(int drawHandle, int x, int y, int r, int speed);
+	Player(int drawHandle, int x, int y, int r, int speed, Enemy* enemy);
 	/*Getter*/
 	/*Setter*/
 	//none.
@@ -38,6 +39,7 @@ private:
 	IsKeyInput _isRightInput{ false,false,KEY_INPUT_D };//Right.
 	//PlayerBullet.
 	Bullet* _pPBullet[3];
+	Enemy* _pEnemy;
 };
 
 /*コンストラクタ*/
@@ -49,17 +51,17 @@ private:
 /// <param name="r">半径</param>
 /// <param name="speed">速度</param>
 /// <param name="maxShotNum">最大発射数</param>
-Player::Player(int drawHandle, int x, int y, int r,int speed) :
+Player::Player(int drawHandle, int x, int y, int r, int speed, Enemy* enemy) :
 	_drawHandle(drawHandle),
 	X(x),
 	Y(y),
 	_r(r),
 	_speed(speed)
 {
-	//弾丸の生成
-	for (int i =0;i<3;i++)
+	//弾丸の初期化
+	for (int i = 0; i < 3; i++)
 	{
-		_pPBullet[i] = new Bullet(X,Y,r,8,ColorCode::RED);
+		_pPBullet[i] = nullptr;
 	}
 }
 
@@ -104,14 +106,43 @@ void Player::Update()
 		X += _speed;
 	}
 
-	/*PlayerBulletの更新*/
-	for (int i=0;i<3;i++)
+	/*PlayerBulletの生成*/
+	if (_isEnterInput.IsNow)
 	{
-		_pPBullet[i]->Update();
+		for (int i = 0; i < 3; i++)
+		{
+			if (_pPBullet[i] == nullptr)
+			{
+				_pPBullet[i] = new Bullet(X, Y, 3, 8, ColorCode::YELLOW);
+				break;
+			}
+		}
 	}
 
+	/*PlayerBulletの更新*/
+	for (int i = 0; i < 3; i++)
+	{
+		//弾丸が存在するなら、更新
+		if (_pPBullet[i] != nullptr)
+		{
+			_pPBullet[i]->Update();
+		}
+	}
 
-	
+	/*PlayerBulletの削除*/
+	for (int i = 0; i < 3; i++)
+	{
+		//弾丸が存在し、かつ、画面から出ていたら削除
+		if (_pPBullet[i] != nullptr && _pPBullet[i]->X > 1280)
+		{
+			//削除処理
+			delete _pPBullet[i];
+			_pPBullet[i] = nullptr;
+		}
+	}
+
+	/*当たり判定*/
+
 }
 /// <summary>
 /// 表示処理の更新
@@ -119,13 +150,23 @@ void Player::Update()
 void Player::Draw()
 {
 	//Playerの描画
-	DrawRotaGraph(X,Y,1,0,_drawHandle,1);
+	DrawRotaGraph(X, Y, 1, 0, _drawHandle, 1);
 
+	//Bulletの描画
+	for (int i = 0; i < 3; i++)
+	{
+		if (_pPBullet[i] != nullptr)
+		{
+			_pPBullet[i]->Draw();
+		}
+	}
 }
 /// <summary>
 /// Debug表示の更新
 /// </summary>
 void Player::DebugDraw()
 {
+	//コリジョンの描画
+	DrawCircle(X,Y,_r,ColorCode::LIME,0);
 
 }
