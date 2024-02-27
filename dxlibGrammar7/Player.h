@@ -11,10 +11,9 @@ public:
 	int X;//x座標
 	int Y;//y座標
 	/*コンストラクタ*/
-	Player(int drawHandle, int x, int y, int r, int speed, Enemy* enemy);
-	/*Getter*/
-	/*Setter*/
-	//none.
+	Player();
+	/*Init*/
+	void Init(int drawHandle, int x, int y, int r, int speed, Enemy* enemy);
 	/*メンバ関数*/
 	void Update();//処理の更新
 	void Draw();//表示の更新
@@ -51,12 +50,13 @@ private:
 /// <param name="r">半径</param>
 /// <param name="speed">速度</param>
 /// <param name="maxShotNum">最大発射数</param>
-Player::Player(int drawHandle, int x, int y, int r, int speed, Enemy* enemy) :
-	_drawHandle(drawHandle),
-	X(x),
-	Y(y),
-	_r(r),
-	_speed(speed)
+Player::Player() :
+	_drawHandle(NULL),
+	X(NULL),
+	Y(NULL),
+	_r(NULL),
+	_speed(NULL),
+	_pEnemy(nullptr)
 {
 	//弾丸の初期化
 	for (int i = 0; i < 3; i++)
@@ -65,15 +65,23 @@ Player::Player(int drawHandle, int x, int y, int r, int speed, Enemy* enemy) :
 	}
 }
 
-/*ゲッター*/
-
-/*セッター*/
-
-
+/*Init*/
+/// <summary>
+/// メンバ変数の初期化
+/// </summary>
+void Player::Init(int drawHandle, int x, int y, int r, int speed, Enemy* enemy)
+{
+	_drawHandle = drawHandle;
+	X = x;
+	Y = y;
+	_r = r;
+	_speed = speed;
+	_pEnemy = enemy;
+}
 
 /*メンバ関数*/
 /// <summary>
-/// 計算処理の更新
+/// 計算の更新
 /// </summary>
 void Player::Update()
 {
@@ -167,6 +175,6 @@ void Player::Draw()
 void Player::DebugDraw()
 {
 	//コリジョンの描画
-	DrawCircle(X,Y,_r,ColorCode::LIME,0);
+	DrawCircle(X, Y, _r, ColorCode::LIME, 0);
 
 }

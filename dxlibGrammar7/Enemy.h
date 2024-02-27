@@ -11,6 +11,8 @@ public:
 	int Y;//y座標
 	/*コンストラクタ*/
 	Enemy(int x, int y, int r, int speed);
+	/*Init*/
+	void Init();
 	/*Getter*/
 	/*Setter*/
 	/*メンバ関数*/
@@ -47,6 +49,15 @@ Enemy::Enemy(int x, int y, int r, int speed) :
 	_pEBullet(nullptr)
 {
 	//↑インスタンス作成時に変更する可能性があるものだけコンストラクタで初期化。
+}
+
+/*Init*/
+/// <summary>
+/// 編集初期化
+/// </summary>
+void Enemy::Init()
+{
+
 }
 
 /// <summary>
