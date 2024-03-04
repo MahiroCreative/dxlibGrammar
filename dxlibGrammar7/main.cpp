@@ -27,8 +27,6 @@
 //実際にゲーム作りの際には.hと.cppに分けてほしい。
 //コンストラクタとか、ゲッターとかセッターとかの解説はここではしない。
 //また、当たり判定のカラーコードなど、よく使う定数などは"Common.h"にまとめた。
-//弾との当たり判定を実現するために、メンバ変数等の初期化はInitで行う。
-//インスタンスを作成した後でないとお互いのポインタを取得できないからである。
 
 
 //Dxlibのエントリーポイント
@@ -47,13 +45,16 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*ゲーム変数*/
 	int playerDrawHandle = LoadGraph("Chara.png");
 
+	/*ゲーム定数*/
+	constexpr int MAX_PLAYER_SHOT = 3;
+
 	/*インスタンスの作成*/
 	//クラスは基本的にポインタで運用する。
-	Player* pPlayer = new Player();
+	Player* pPlayer = new Player;
 	Enemy* pEnemy = new Enemy{ 1100,360,64,2 };
 
 	/*初期化*/
-	pPlayer->Init(LoadGraph("Chara.png"),20,360,8,3,pEnemy);
+	pPlayer->Init(LoadGraph("Chara.png"),20,360,8,3,true,true);
 
 	/*ゲームループ部*/
 	//gameRoop.

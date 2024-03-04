@@ -7,12 +7,12 @@ class Enemy
 {
 public:
 	/*publicメンバ変数*/
-	int X;//x座標
-	int Y;//y座標
+	int X=NULL;//x座標
+	int Y=NULL;//y座標
 	/*コンストラクタ*/
-	Enemy(int x, int y, int r, int speed);
+	Enemy();
 	/*Init*/
-	void Init();
+	void Init(int x, int y, int r, int speed,int visible);
 	/*Getter*/
 	/*Setter*/
 	/*メンバ関数*/
@@ -21,41 +21,24 @@ public:
 	void DebugDraw();//Debug表示の更新
 private:
 	/*privateメンバ変数*/
-	int _r;//半径
-	int _speed;//スピード
-	int _bulletSpeed;//弾丸の速度
+	int _r=NULL;//半径
+	int _speed=NULL;//スピード
+	int _bulletSpeed=NULL;//弾丸の速度
 	//変更される可能性の無いものはここで初期化
 	unsigned int _color = ColorCode::AQUA;//色
 	unsigned int _hitColor = ColorCode::RED;//Hit色
 	bool _isHit = false;//当たり判定
-	bool _isVisible = true;//表示判定
-	//PlayerBullet.
-	Bullet* _pEBullet;
+	bool _isVisible = false;//表示判定
 };
 
+/*コンストラクタ*/
 /// <summary>
-/// Enemyコンストラクタ。
+/// Enemyのコンストラクタ(インスタンス作成のみ)
 /// </summary>
-/// <param name="x">X座標</param>
-/// <param name="y">Y座標</param>
-/// <param name="r">半径</param>
-/// <param name="speed">速度</param>
-Enemy::Enemy(int x, int y, int r, int speed) :
-	X(x),
-	Y(y),
-	_r(r),
-	_speed(speed),
-	_bulletSpeed(-4),
-	_pEBullet(nullptr)
-{
-	//↑インスタンス作成時に変更する可能性があるものだけコンストラクタで初期化。
-}
+Enemy::Enemy(){}
 
 /*Init*/
-/// <summary>
-/// 編集初期化
-/// </summary>
-void Enemy::Init()
+void Enemy::Init(int x, int y, int r, int speed,int visible)
 {
 
 }
@@ -72,34 +55,6 @@ void Enemy::Update()
 	{
 		_speed = -_speed;
 	}
-
-	/*EnemyBullet発射*/
-	if (_pEBullet == nullptr)
-	{
-		_pEBullet = new Bullet(X, Y, 32, _bulletSpeed, ColorCode::MAGENTA);
-	}
-
-	/*EnemyBullet更新*/
-	if (_pEBullet != nullptr)
-	{
-		_pEBullet->Update();
-	}
-
-	//弾丸が存在し、かつ、画面から出ていたら削除
-	if (_pEBullet != nullptr && (_pEBullet->X < -120))
-	{
-		//削除処理
-		delete _pEBullet;
-		_pEBullet = nullptr;
-
-		//弾丸速度上昇
-		if (_bulletSpeed > -16)
-		{
-			_bulletSpeed += -1;
-		}
-
-	}
-
 }
 
 /// <summary>
@@ -108,12 +63,6 @@ void Enemy::Update()
 void Enemy::Draw()
 {
 	DrawCircle(X, Y, _r, _color, 1);
-
-	/*EnemyBullet*/
-	if (_pEBullet != nullptr)
-	{
-		_pEBullet->Draw();
-	}
 }
 
 void Enemy::DebugDraw()
