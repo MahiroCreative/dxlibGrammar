@@ -51,10 +51,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*インスタンスの作成*/
 	//クラスは基本的にポインタで運用する。
 	Player* pPlayer = new Player;
-	Enemy* pEnemy = new Enemy{ 1100,360,64,2 };
+	Enemy* pEnemy = new Enemy;
 
 	/*初期化*/
 	pPlayer->Init(LoadGraph("Chara.png"),20,360,8,3,true,true);
+	pEnemy->Init(1100, 360, 64, 2, true);
 
 	/*ゲームループ部*/
 	//gameRoop.

@@ -40,7 +40,11 @@ Enemy::Enemy(){}
 /*Init*/
 void Enemy::Init(int x, int y, int r, int speed,int visible)
 {
-
+	X = x;
+	Y = y;
+	_r = r;
+	_speed = speed;
+	_isVisible = visible;
 }
 
 /// <summary>
@@ -62,7 +66,11 @@ void Enemy::Update()
 /// </summary>
 void Enemy::Draw()
 {
-	DrawCircle(X, Y, _r, _color, 1);
+	if (_isVisible)
+	{
+		DrawCircle(X, Y, _r, _color, 1);
+	}
+	
 }
 
 void Enemy::DebugDraw()
