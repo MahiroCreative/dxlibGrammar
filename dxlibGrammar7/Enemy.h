@@ -15,6 +15,7 @@ public:
 	void Init(int x, int y, int r, int speed,int visible);
 	/*Getter*/
 	/*Setter*/
+	void setColor(unsigned int color);
 	/*メンバ関数*/
 	void Update();//処理の更新
 	void Draw();//表示の更新
@@ -36,6 +37,16 @@ private:
 /// Enemyのコンストラクタ(インスタンス作成のみ)
 /// </summary>
 Enemy::Enemy(){}
+
+/*Getter*/
+/// <summary>
+/// 色の変更
+/// </summary>
+/// <param name="color">カラーコード</param>
+void Enemy::setColor(unsigned int color)
+{
+	_color = color;
+}
 
 /*Init*/
 void Enemy::Init(int x, int y, int r, int speed,int visible)

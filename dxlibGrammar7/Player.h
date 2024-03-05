@@ -14,7 +14,8 @@ public:
 	/*Init*/
 	void Init(int drawHandle, int x, int y, int r, int speed, bool visible, bool colVisible);
 	/*Getter*/
-	bool getIsShotFlag();
+	bool getShotFlag();
+	int getR();
 	/*メンバ関数*/
 	void Update();//処理の更新
 	void Draw();//表示の更新
@@ -69,14 +70,21 @@ void Player::Init(int drawHandle, int x, int y, int r, int speed, bool visible, 
 }
 
 /*Getter*/
-
 /// <summary>
 /// 弾丸を発射した際にTrue、それ以外はFalse
 /// </summary>
 /// <returns>bool</returns>
-bool Player::getIsShotFlag()
+bool Player::getShotFlag()
 {
 	return _isShotFlag;
+}
+/// <summary>
+/// 半径の取得
+/// </summary>
+/// <returns></returns>
+int Player::getR()
+{
+	return _r;
 }
 
 /*メンバ関数*/
