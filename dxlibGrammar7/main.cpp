@@ -159,13 +159,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		{
 			debugNum = 0;
 		}
-
-		for (int i=0;i<PLAYER_SHOT_MAX;i++)
+		//エネミーとPlayerの弾の当たり判定
+		for (int i = 0; i < PLAYER_SHOT_MAX; i++)
 		{
 			//弾とエネミーの当たり判定
 		}
-
-
 
 		/*Draw*/
 		//player.
@@ -180,7 +178,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 			pPBullet[i]->Draw();
 		}
 
-
 		/*DebguDraw*/
 		//Debu文字
 		DrawFormatString(0, 0, ColorCode::RED, "WSAD(上下左右),Enter(ショット)");
@@ -188,7 +185,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		//コリジョン表示
 		pPlayer->DebugDraw();
 		pEnemy->DebugDraw();
-
 
 		//裏画面を表へ
 		ScreenFlip();
