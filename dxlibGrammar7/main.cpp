@@ -48,10 +48,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	/*ゲーム定数*/
 	constexpr int MAX_PLAYER_SHOT = 3;
 
-	/*インスタンスの作成*/
+	/*ポインタの作成*/
 	//クラスは基本的にポインタで運用する。
-	Player* pPlayer = new Player;
-	Enemy* pEnemy = new Enemy;
+	Player* pPlayer;
+	Enemy* pEnemy;
+	
+
+	/*インスタンスの作成*/
+	//Bullet* pPBullet[MAX_PLAYER_SHOT]
+
 
 	/*初期化*/
 	pPlayer->Init(LoadGraph("Chara.png"),20,360,8,3,true,true);
