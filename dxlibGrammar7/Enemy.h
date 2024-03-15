@@ -14,6 +14,7 @@ public:
 	/*Init*/
 	void Init(int x, int y, int r, int speed,int visible);
 	/*Getter*/
+	int getR();
 	/*Setter*/
 	void setColor(unsigned int color);
 	/*ƒƒ“ƒoŠÖ”*/
@@ -38,7 +39,7 @@ private:
 /// </summary>
 Enemy::Enemy(){}
 
-/*Getter*/
+/*Setter*/
 /// <summary>
 /// F‚Ì•ÏX
 /// </summary>
@@ -46,6 +47,16 @@ Enemy::Enemy(){}
 void Enemy::setColor(unsigned int color)
 {
 	_color = color;
+}
+
+/*Getter*/
+/// <summary>
+/// ”¼Œa‚Ìæ“¾
+/// </summary>
+/// <returns>int</returns>
+int Enemy::getR()
+{
+	return _r;
 }
 
 /*Init*/

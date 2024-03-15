@@ -68,6 +68,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 
 	/*デバッグ用変数*/
 	int debugNum = 0;
+	int debugNum2 = 0;
 
 	/*ポインタの作成*/
 	//クラスは基本的にポインタで運用する。
@@ -143,7 +144,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		}
 
 		/*当たり判定*/
-		//エネミーの弾とプレイヤーの当たり判定
+		///エネミーの弾とプレイヤーの当たり判定
+		//距離の計算
 		int delX = pPlayer->X - pEBullet->X;//xの相対距離
 		int delY = pPlayer->Y - pEBullet->Y;//yの相対距離
 		int magLen = delX * delX + delY * delY;//距離のマグニチュード(2乗)
@@ -159,10 +161,26 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		{
 			debugNum = 0;
 		}
-		//エネミーとPlayerの弾の当たり判定
+		///エネミーとPlayerの弾の当たり判定
 		for (int i = 0; i < PLAYER_SHOT_MAX; i++)
 		{
-			//弾とエネミーの当たり判定
+			//距離の計算
+			delX = pEnemy->X - pPBullet[i]->X;//xの相対距離
+			delY = pEnemy->Y - pPBullet[i]->Y;;//yの相対距離
+			magLen = delX * delX + delY * delY;//距離のマグニチュード(2乗)
+			delR = pEnemy->getR() + pPBullet[i]->getR();//当たった時のR
+			magR = delR * delR;//Rのマグニチュード(2乗)
+			//当たり判定の計算
+			if (magLen < magR)
+			{
+				//当たってたらエネミーの色変える
+				pEnemy->setColor(ColorCode::YELLOW);
+				break;//一発でも当たってたら当たってた扱い。
+			}
+			else
+			{
+				pEnemy->setColor(ColorCode::AQUA);
+			}
 		}
 
 		/*Draw*/
@@ -173,7 +191,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		//eBullet.
 		pEBullet->Draw();
 		//pBullet.
-		for (int i=0;i<PLAYER_SHOT_MAX;i++)
+		for (int i = 0; i < PLAYER_SHOT_MAX; i++)
 		{
 			pPBullet[i]->Draw();
 		}
